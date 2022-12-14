@@ -17,6 +17,9 @@ class node{
     }
 
     node* createTree(node*root);
+    void preorder(node*root);
+    void inorder(node*root);
+    void postorder(node*root);
 };
 
 node* node::createTree(node*root){
@@ -35,8 +38,57 @@ node* node::createTree(node*root){
     return root;
 }
 
+void node::preorder(node*root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<"\t";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void node::inorder(node*root){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data<<"\t";
+    inorder(root->right);
+}
+
+void node::postorder(node*root){
+    if(root==NULL){
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<"\t";
+}
+
 int main(){
+    int choice;
     node*root = NULL;
     node*n = new node(0);
     root=n->createTree(root);
+    cout<<"\n"<<"Choose from the dropdown below:"<<"\n";
+    cout<<"\n"<<"1.Preorder Traversal";
+    cout<<"\n"<<"2.Inorder Traversal";
+    cout<<"\n"<<"3.Postorder Traversal";
+    cin>>choice;
+    switch (choice){
+        case 1:{
+            n->preorder(root);
+            break;
+        }
+
+        case 2:{
+            n->inorder(root);
+            break;
+        }
+
+        case 3:{
+            n->postorder(root);
+            break;
+        }
+    }
 }

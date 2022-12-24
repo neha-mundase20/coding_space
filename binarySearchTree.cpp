@@ -123,7 +123,6 @@ node* delete_in_BST(node*root,int key){
             int mini = temp1->data;
             root->data=mini;
             root->right=delete_in_BST(root->right,mini);
-            return root;
         }
     }
 
@@ -134,6 +133,7 @@ node* delete_in_BST(node*root,int key){
     else{
         root->left=delete_in_BST(root->left,key);
     }
+    return root;
 }
 
 int main(){

@@ -136,6 +136,34 @@ node* delete_in_BST(node*root,int key){
     return root;
 }
 
+void mirror_BST(node*root){
+    node*temp1=root;
+    if(temp1==NULL){
+        return;
+    }
+    else{
+        mirror_BST(temp1->left);
+        mirror_BST(temp1->right);
+
+        node*temp2;
+        temp2=temp1->left;
+        temp1->left=temp1->right;
+        temp1->right=temp2;
+    }
+}
+
+void displayLeafNodes(node*root){
+    if(root==NULL){
+        return;
+    }
+
+    if(root->left==NULL && root->right==NULL){
+        cout<<root->data<<"\t";
+    }
+    displayLeafNodes(root->left);
+    displayLeafNodes(root->right);
+}
+
 int main(){
     int val,key,choice;
     node*root=NULL;
@@ -153,7 +181,9 @@ int main(){
     cout<<"\n"<<"1.Inorder BST traversal"<<"\n";
     cout<<"\n"<<"2.Search for a value in BST"<<"\n";
     cout<<"\n"<<"3.Delete any value in BST"<<"\n";
-    cout<<"\n"<<"4.Exit"<<"\n";
+    cout<<"\n"<<"4.Mirror BST"<<"\n";
+    cout<<"\n"<<"5.Display leaf nodes"<<"\n";
+    cout<<"\n"<<"6.Exit"<<"\n";
     cin>>choice;
     
     switch(choice){
@@ -176,10 +206,22 @@ int main(){
            root=delete_in_BST(root,key);
            break;
         }
+
+
         case 4:{
+            mirror_BST(root);
+            break;
+        }
+
+        case 5:{
+            displayLeafNodes(root);
+            break;
+        }
+
+        case 6:{
             break;
         }
     }
-    }while(choice!=4);
+    }while(choice!=6);
     return 0;
 }
